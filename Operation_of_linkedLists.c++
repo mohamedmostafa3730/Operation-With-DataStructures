@@ -71,7 +71,39 @@ class Linkedlist {
             cout << "soryy, this item is not found " << endl;
         }
         }
-    
+    void append(int newValeo) {
+        if(isempty())
+        insertFirst(newValeo);
+        else {}
+            Node* temp = head;
+        while (temp->next!=NULL) {
+            temp = temp->next;
+        }
+        Node* NewNode = new Node();
+        NewNode->data = newValeo;
+        temp->next = NewNode;
+        NewNode->next = NULL;
+    }
+    void Delete(int item) {
+        if(isempty())
+         cout << "\n \t the Linked list is empty \t" << endl;
+        Node* delptr = head;
+        if (head->data == item) {
+            head = head->next;
+            delete delptr;
+        }
+        else {
+            Node* prev = NULL;
+            delptr = head;
+            while (delptr->data != item) {
+                prev = delptr;
+                delptr = delptr->next;
+            }
+            prev->next = delptr->next;
+            delete delptr;
+        }
+    }
+
 };
 int main() {
     Linkedlist L1;
@@ -112,6 +144,19 @@ int main() {
     cin >> item >> newValeo;
     L1.insertBefore(item,newValeo);
     L1.Desplay();
+
+    cout << "\n \t enter the item to append \t" << endl;
+    cin >> item;
+    cout << "\n \t The List contains are: " << L1.count() << endl;
+    L1.append(item);
+    L1.Desplay();
+
+    cout << "\n \t enter the item to delet \t" << endl;
+    cin >> item;
+    cout << "\n \t The List contains are: " << L1.count() << endl;
+    L1.Delete(item);
+    L1.Desplay();
+
 }
 
 /*
