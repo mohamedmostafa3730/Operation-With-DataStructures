@@ -28,7 +28,7 @@ class Linkedlist {
             Node1->next=head;
             head = Node1;
         }
-        
+             
     }
     void Desplay() {
         Node* temp = head;
@@ -203,3 +203,4 @@ Linkedlist L1;
         }    
             }
             */
+           
