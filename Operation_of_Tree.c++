@@ -61,6 +61,53 @@ class BST {
         postOrder(pnode->right);
         cout << pnode->data << "\t";
     }
+    
+    Node* Search(Node* Snode,int key) {
+        if(Snode==NULL)
+        return NULL;
+
+        else if (Snode->data==key)
+        return Snode;
+
+        else if (key<Snode->data)
+        return Search(Snode->lift,key);
+
+        else
+        return Search(Snode->right,key);
+    }
+
+    bool Search(int key) {
+        Node* result = Search(root,key);
+
+        if (result==NULL)
+        return false;
+
+        else
+        return true;
+    }
+
+    Node* findMin(node* Knode) {
+        if (Knode==NULL)
+        return Knode;
+
+        else if (Knode->lift==NULL)
+        return root;
+
+        else
+        return findMin(Knode->lift);    
+    }
+
+    Node* findMax(Node* Knode) {
+        if (Knode==NULL)
+        return Knode;
+
+        else if (Knode->right==NULL)
+        return root;
+
+        else
+        return findMax(Knode->right);
+        }
+
 };
 
 
@@ -84,4 +131,20 @@ int main() {
     cout << "===========================================================================" << endl;
     B1.preOrder(B1.root);
     cout << "===========================================================================" << endl;
+
+    int item;
+    cout << "\n \t Enter your Search item: " << endl;
+    cin >>item;
+    if (B1.Search(item))
+    cout << "\n \t item is found " << endl;
+
+    else
+    cout << "\n \t item is not found " << endl;
+
+    cout << "===========================================================================" << endl;
+    cout << "\n \t Find the minimum" << endl;
+    Noded* item = B1.findMin(B1.root)[
+        if ()
+    ]
+    if (findMin(B1))
 }
