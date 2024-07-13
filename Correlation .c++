@@ -91,3 +91,10 @@ int main()
  cout << "r= " << r << endl;
  
 }
+/*
+1- Dynamic Memory Allocation: The arrays 𝑋 and 𝑌 are dynamically allocated based on the user input for size n
+2- Variable Initialization: The sums are initialized to zero to avoid undefined behavior.
+3- Sum Calculations: The sum calculations for sumX1 and sumY1 are fixed to accumulate values correctly.
+4- Error Handling: Added a check to prevent division by zero when calculating r.
+5- Memory Management: Properly deallocate memory allocated for arrays.
+*/
