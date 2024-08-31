@@ -10,6 +10,7 @@ class ArrayList{
  int numOfItem; // number of element 
 
  //to make biger than Array*2 & copy all of elements from ald array to new array
+	
 	void expand(){    
 		cap *= 2;
 		T* temp = new T[cap];
@@ -33,7 +34,6 @@ public:
 	~ArrayList(){
 		delete arr;
 	}
-
 
  //Methods
 	void addToLast(T value){
