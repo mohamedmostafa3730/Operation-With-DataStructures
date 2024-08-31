@@ -1,101 +1,109 @@
 #include <iostream>
 using namespace std;
 
-template<class T>
+template <class valeo>
 
-class ArrayList{
- private:
- T* arr; //pointer of Array
- int cap; //size of Array
- int numOfItem; // number of element 
+class ArrayList
+{
+private:
+	valeo *Array;
+	int SizeOfArray, NumOfElements;
 
- //to make biger than Array*2 & copy all of elements from ald array to new array
-	
-	void expand(){    
-		cap *= 2;
-		T* temp = new T[cap];
-		for (int i = 0; i < numOfItem; i++){
-			temp[i] = arr[i];
-		}
-		delete []arr;
-		arr = temp;
+	void Expand()
+	{
+		SizeOfArray = SizeOfArray * 2;
+		valeo *temp = new valeo[SizeOfArray];
+		for (int i = 0; i < NumOfElements; i++)
+			temp[i] = Array[i];
+		delete[] Array;
+		Array = temp;
 	}
 
 public:
-
- //cons
-	ArrayList(){
-		cap = 2;
-		numOfItem = 0;
-		arr = new T[cap];
+	ArrayList()
+	{
+		SizeOfArray = 2;
+		NumOfElements = 0;
+		Array = new valeo[SizeOfArray];
 	}
 
- //des
-	~ArrayList(){
-		delete arr;
+	~ArrayList()
+	{
+		delete[] Array;
 	}
 
- //Methods
-	void addToLast(T value){
-		if (numOfItem == cap){
-			expand();
+	void AddToFirst(valeo item)
+	{
+		if (SizeOfArray == NumOfElements)
+			Expand();
+		for (int i = NumOfElements - 1; i >= 0; i--)
+			Array[i + 1] = Array[i];
+		Array[0] = item;
+		NumOfElements++;
+	}
+
+	void AddToLast(valeo item)
+	{
+		if (SizeOfArray == NumOfElements)
+			Expand();
+		Array[NumOfElements] = item;
+		NumOfElements++;
+	}
+
+	void RemoveFromLast()
+	{
+		NumOfElements--;
+	}
+
+	void RemoveFromFirst()
+	{
+		for (int i = 0; i < NumOfElements - 1; i++)
+		{
+			Array[i] = Array[i + 1];
+			NumOfElements--;
 		}
-		arr[numOfItem] = value;
-		numOfItem++;
 	}
 
-	void removeFromLast(){
-		numOfItem--;
-	}
-
-	void addToFirst(T value){
-		if (numOfItem == cap){
-			expand();
-		}
-
-		for (int i = numOfItem - 1; i >= 0; i--){
-			arr[i + 1] = arr[i];
-		}
-
-		arr[0] = value;
-		numOfItem++;
-	}
-
-	void removeFromFirst(){
-		for (int i = 0; i < numOfItem - 1; i++){
-			arr[i] = arr[i + 1];
-		}
-		numOfItem--;
-	}
-
-	bool search(T value){
-		for (int i = 0; i < numOfItem; i++){
-			if (arr[i] == value){
+	bool Search(valeo item)
+	{
+		for (int i = 0; i < NumOfElements; i++)
+		{
+			if (Array[i] == item)
 				return true;
-			}
+			else
+				return false;
 		}
-		return false;
 	}
 
-	void print(){
-		for (int i = 0; i < numOfItem; i++){
-			cout << arr[i] << " ";
+	void reverse(valeo Array, int NumOfElements)
+	{
+		int i = 0;
+		int j = NumOfElements - 1;
+		int temp;
+		for (; i < NumOfElements / 2; i++, j--)
+		{
+			Array[i] = temp;
+			Array[i] = Array[j];
+			Array[j] = temp;
 		}
-		cout << endl;
-
-	}
-	
-	void setCap(int cap){
-		this->cap = cap;
 	}
 
+	void Print()
+	{
+		for (int i = 0; i < NumOfElements; i++)
+		{
+			cout << Array[i] << ", ";
+		}
+	}
 };
 
+int main()
+{
+	ArrayList<int> A;
 
-int main() {
-	ArrayList <int> l;
-	for (int i = 10; i <= 90; i+=10) {
-		l.addToLast(i);
+	for (int i = 10; i <= 100; i += 10)
+	{
+		A.AddToFirst(i);
 	}
-	l.print();
+	A.Print();
 }
