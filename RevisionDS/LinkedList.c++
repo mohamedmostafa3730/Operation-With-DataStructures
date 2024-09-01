@@ -15,11 +15,6 @@ class Node {
         this->next=next;
         this->item=item;
     }
-
-
-
-
-
 };
 
 class LinkedList {
