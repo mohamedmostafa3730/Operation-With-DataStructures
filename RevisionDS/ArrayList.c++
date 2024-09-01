@@ -75,16 +75,17 @@ public:
 		}
 	}
 
-	void reverse(valeo Array, int NumOfElements)
-	{
-		int i = 0;
-		int j = NumOfElements - 1;
-		int temp;
-		for (; i < NumOfElements / 2; i++, j--)
-		{
-			Array[i] = temp;
+	void reverse() {
+		int i=0;
+		int j=NumOfElements;
+		valeo temp;
+
+		while (i<j) {
+			temp = Array[i];
 			Array[i] = Array[j];
 			Array[j] = temp;
+			i++;
+			j--;
 		}
 	}
 
@@ -106,4 +107,7 @@ int main()
 		A.AddToFirst(i);
 	}
 	A.Print();
+	A.reverse();
+	A.Print();
+
 }
