@@ -1,4 +1,3 @@
-/*
 class DNode
 {
 public:
@@ -68,5 +67,4 @@ public:
 		return size;
 	}
 };
-
 // Stack FILO	     push,pop,Top,isEmpty,size

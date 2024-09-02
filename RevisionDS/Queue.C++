@@ -1,4 +1,3 @@
-/*
 class MyQueue
 {
 	DNode* head;
@@ -52,5 +51,4 @@ public:
 		return size;
 	}
 };
-*/
 // Queue FIFO        push,pop,Front,isEmpty,size
