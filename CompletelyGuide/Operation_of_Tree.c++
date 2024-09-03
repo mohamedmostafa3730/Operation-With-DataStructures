@@ -6,8 +6,8 @@ class Node {
     int data;
     Node* lift, *right;
 
-    Node(int valeo) {
-        data = valeo;
+    Node(int value) {
+        data = value;
         lift = right = NULL;
     }
 };
@@ -17,67 +17,67 @@ class BST {
     Node* root;
 
     BST() {
-        root = NULL;
+        root = NULL; 
     }
-    Node* Insert(Node* pnode,int item) {
-        if(pnode==NULL) {
-            Node* newNode = new Node(item);
-            pnode = newNode;
+    Node* Insert(Node* Root,int item) { //first func
+        if(Root==NULL) {  //case 1 => do not have root
+            Node* newNode = new Node(item); //Create a new node with the given value
+            Root = newNode;    //Assign Root to new node  
         }
-        else if (item <pnode->data) {
-        pnode->lift = Insert(pnode->lift,item);
+        else if (item < Root->data) {  //case 2 => the element lesser data of Root
+        Root->lift = Insert(Root->lift,item) //going to Recur on the left child
         }
 
-        else 
-        pnode->right = Insert(pnode->right,item);
+        else  //case 3 => the element greater data of Root
+        Root->right = Insert(Root->right,item);  //going to Recur on the rite child
 
-        return pnode;
+        return Root; // return if make recur
     }
 
     void Insert(int item) {
         root = Insert(root,item);
     }
 
-    void preOrder(Node* pnode) {
-        if(pnode==NULL)
+    void preOrder(Node* Root) {
+        if(Root==NULL)
          return;
-        cout << pnode->data << "\t";
-        preOrder(pnode->lift);
-        preOrder(pnode->right);
+        cout << Root->data << "\t";
+        preOrder(Root->lift);
+        preOrder(Root->right);
     }
 
-    void inOrder(Node* pnode) {
-        if(pnode==NULL)
+    void inOrder(Node* Root) {
+        if(Root==NULL)
          return;
-        inOrder(pnode->lift);
-        cout << pnode->data << "\t";
-        inOrder(pnode->right);
+        inOrder(Root->lift);
+        cout << Root->data << "\t";
+        inOrder(Root->right);
     }
 
-    void postOrder(Node* pnode) {
-        if(pnode==NULL)
+    void postOrder(Node* Root) {
+        if(Root==NULL)
          return;
-        postOrder(pnode->lift);
-        postOrder(pnode->right);
-        cout << pnode->data << "\t";
+        postOrder(Root->lift);
+        postOrder(Root->right);
+        cout << Root->data << "\t";
     }
     
-    Node* Search(Node* Snode,int key) {
-        if(Snode==NULL)
+    Node* Search(Node* Root,int key) {
+        if(Root==NULL)
         return NULL;
 
-        else if (Snode->data==key)
-        return Snode;
+        else if (Root->data==key)
+        return Root;
 
-        else if (key<Snode->data)
-        return Search(Snode->lift,key);
+        else if (key<Root->data)
+        return Search(Root->lift,key);
 
         else
-        return Search(Snode->right,key);
+        return Search(Root->right,key);
     }
 
     bool Search(int key) {
-        Node* result = Search(root,key);
+        Node* result = Search(Root,key);
 
         if (result==NULL)
         return false;
@@ -86,27 +86,61 @@ class BST {
         return true;
     }
 
-    Node* findMin(node* Knode) {
-        if (Knode==NULL)
-        return Knode;
+    Node* findMin(node* Root) {
+        if (Root==NULL)
+        return Root;
 
-        else if (Knode->lift==NULL)
+        else if (Root->lift==NULL)
         return root;
 
         else
-        return findMin(Knode->lift);    
+        return findMin(Root->lift);    
     }
 
-    Node* findMax(Node* Knode) {
-        if (Knode==NULL)
-        return Knode;
+    Node* findMax(Node* Root) {
+        if (Root==NULL)
+        return Root;
 
-        else if (Knode->right==NULL)
+        else if (Root->right==NULL)
         return root;
 
         else
-        return findMax(Knode->right);
+        return findMax(Root->right);
         }
+
+    Node* Delete(Node* Root, int item) {
+        if (Root==NULL) return NULL;                                                //Empty Tree
+        if (item < Root->data) Root->lift = Delete(Root->lift, item);            //item exists in left sub-tree
+        else if (item > Root->data) Root->right = Delete(Root->right,item);     //item exists in rite-tree
+        else {  // item exists in Parent node 
+                //[ leave node - have one childe left - have one childe rite - have 2 children]
+            if (Root->lift==NULL&&Root->right==Root) {    //leave node
+                Root=NULL;
+            }
+
+            if else (Root->lift!=NULL&&Root->right==Root) { //have one childe left
+                Root->data = Root->lift->data;
+                delete Root->lift;
+                Root->lift = NULL;
+            }
+            
+            if else (Root->lift==NULL&&Root->right!=Root) { //have one childe rite 
+                Root->data = Root->right->data;
+                delete Root->right;
+                Root->right = NULL;
+            }
+
+            else { //have 2 children
+                Node* Max = findMax(Root->lift);
+                Root->data = Max->data;
+                Root->lift = Delete(Root->lift,Max->data);
+
+            }
+
+        }
+
+        return Root;
+    }
 
 };
 
@@ -124,27 +158,11 @@ int main() {
     B1.Insert(343);
     B1.Insert(234);
     B1.Insert(359);
-
-    B1.inOrder(B1.root);
-    cout << "===========================================================================" << endl;
-    B1.postOrder(B1.root);
-    cout << "===========================================================================" << endl;
     B1.preOrder(B1.root);
     cout << "===========================================================================" << endl;
+    B1.Delete(22);
+    B1.preOrder(B1.root);
 
-    int item;
-    cout << "\n \t Enter your Search item: " << endl;
-    cin >>item;
-    if (B1.Search(item))
-    cout << "\n \t item is found " << endl;
+    
 
-    else
-    cout << "\n \t item is not found " << endl;
-
-    cout << "===========================================================================" << endl;
-    cout << "\n \t Find the minimum" << endl;
-    Noded* item = B1.findMin(B1.root)[
-        if ()
-    ]
-    if (findMin(B1))
 }
